@@ -1,4 +1,3 @@
-import { AppLayout } from "../../layouts/App"
 import { posts } from "../Feed/data"
 import styles from './blogpost.module.css'
 import { ThumbsUpButton } from "../../components/CardPost/ThumbsUpButton"
@@ -8,12 +7,29 @@ import { Author } from "../../components/Author"
 import Typography from "../../components/Typography"
 import { CommentList } from "../../components/CommentList"
 import ReactMarkdown from 'react-markdown'
+import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import { NotFound } from "../../pages/NotFound" 
 
 export const BlogPost = () => {
 
-    const post = posts[0]
+    const {slug} = useParams()
+    const navigate = useNavigate()
+    const post = posts.find((p) => p.slug === slug)
+
+    useEffect(() => {
+        if (!post) {
+        navigate('/not-found')
+        }
+    }, [post, navigate])
+
+    if (!post) {
+        return null
+    }
+    
     return (
-        <AppLayout>
+        
             <main className={styles.main}>
                 <article className={styles.card}>
                     <header className={styles.header}>
@@ -56,6 +72,6 @@ export const BlogPost = () => {
                 </div>
                 <CommentList comments={post.comments} />
             </main>
-        </AppLayout>
+        
     )
 }

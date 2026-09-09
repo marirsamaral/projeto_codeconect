@@ -5,17 +5,17 @@ import {useNavigate} from 'react-router-dom'
 
 export const ProtectedRouter = ({children}) => {
 
-    const {isAuthenticated, idLoading} = useAuth()
+    const {isAuthenticated, isLoading} = useAuth()
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if ( !idLoading && !isAuthenticated ) {
+        if ( !isLoading && !isAuthenticated ) {
             navigate('/auth/login')
         }
-    }, [isAuthenticated, idLoading, navigate])
+    }, [isAuthenticated, isLoading, navigate])
 
-    if (idLoading) {
+    if (isLoading) {
         return <Spinner/>
     }
 

@@ -3,7 +3,6 @@ import { Checkbox } from "../../components/Checkbox"
 import { Input } from "../../components/Input"
 import { Label } from "../../components/Label"
 import Typography from "../../components/Typography"
-import { AuthLayout } from "../../layouts/Auth"
 import { Button } from "../../components/Button"
 import banner from './banner-login.png'
 import { IconArrowFoward } from "../../components/icons/IconArrowFoward"
@@ -22,10 +21,10 @@ export const Login = () => {
     const {login} = useAuth()
     const navigate = useNavigate()
 
-    const onSubmit = (formData) => {
+    const onSubmit =  (formData) => {
         const email = formData.get('email')
         const password = formData.get('password') 
-        const response = login(email, password)
+        const response =  login(email, password)
 
         if (response.success) {
            navigate("/")
@@ -37,7 +36,7 @@ export const Login = () => {
 
 
     return (
-        <AuthLayout>
+       
             <AuthFormContainer bannerSrc={banner}>
                 <Typography variant="h1" color="--offwhite">Login</Typography>
                 <Typography variant="h2" color="--offwhite">Boas-vindas! Faça seu login.</Typography>
@@ -86,6 +85,6 @@ export const Login = () => {
                     </Link>
                 </footer>
             </AuthFormContainer>
-        </AuthLayout>
+        
     )
 }
