@@ -32,9 +32,8 @@ export const AppRouter = () => {
               <BlogPost/>
             </ProtectedRouter>
           } />
+          <Route path="*" element={<NotFound />} />
         </Route>
-          <Route path='not-found' element={<NotFound />} />
-
       </Routes>
     </BrowserRouter>
     )
